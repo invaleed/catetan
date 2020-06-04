@@ -1,0 +1,28 @@
+# Konek dari lxc ke virtualbox
+
+# lxc network show lxdbr0
+config:
+  ipv4.address: 192.168.50.1/24
+  ipv4.nat: "true"
+  ipv6.address: fd42:c75d:f1a1:ef28::1/64
+  ipv6.nat: "true"
+description: ""
+name: lxdbr0
+type: bridge
+used_by:
+- /1.0/instances/dockerz
+- /1.0/instances/gitlab
+- /1.0/instances/jenkins
+- /1.0/instances/jfrog
+- /1.0/instances/mysql
+- /1.0/instances/sonarqube
+- /1.0/instances/training
+managed: true
+status: Created
+locations:
+- none
+
+Dari Host jalanin
+# nmcli connection add type tun ifname tap0 con-name tap0 mode tap master lxcbr0
+
+Dari Virtualbox, set vm menggunakan adapter "bridge" dengan nama "tap0"
